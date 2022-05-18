@@ -3,7 +3,7 @@
     #region using
 
     using System;
-
+    using System.Collections.Generic;
     using OpenQA.Selenium.Remote;
 
     #endregion
@@ -127,6 +127,26 @@
 
         #region Methods
 
+        /// <inheritdoc/>
+        protected override Dictionary<string, object> GetCapabilitiesDictionary(ICapabilities capabilitiesToConvert)
+        {
+            if (capabilitiesToConvert is WiniumDesiredCapabilities winiumCapabilities)
+            {
+                return new Dictionary<string, object>(winiumCapabilities.CapabilitiesDictionary);
+            }
+            return base.GetCapabilitiesDictionary(capabilitiesToConvert);
+        }
+
+        /// <inheritdoc/>
+        protected override Dictionary<string, object> GetLegacyCapabilitiesDictionary(ICapabilities legacyCapabilities)
+        {
+            if (legacyCapabilities is WiniumDesiredCapabilities winiumCapabilities)
+            {
+                return new Dictionary<string, object>(winiumCapabilities.CapabilitiesDictionary);
+            }
+            return base.GetLegacyCapabilitiesDictionary(legacyCapabilities);
+        }
+
         private static WiniumDriverService CreateDefaultService(Type optionsType, string directory)
         {
             if (optionsType == typeof(DesktopOptions))
@@ -139,13 +159,8 @@
                 return WiniumDriverService.CreateStoreAppsService(directory);
             }
 
-            if (optionsType == typeof(SilverlightOptions))
-            {
-                return WiniumDriverService.CreateSilverlightService(directory);
-            }
-
             throw new ArgumentException(
-                "Option type must be type of DesktopOptions, StoreAppsOptions or SilverlightOptions", 
+                "Option type must be type of DesktopOptions or StoreAppsOptions", 
                 "optionsType");
         }
 
@@ -153,55 +168,55 @@
         {
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "findDataGridCell", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/datagrid/cell/{row}/{column}"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/datagrid/cell/{row}/{column}"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "getDataGridColumnCount", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/datagrid/column/count"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/datagrid/column/count"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "getDataGridRowCount", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/datagrid/row/count"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/datagrid/row/count"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "scrollToDataGridCell", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/datagrid/scroll/{row}/{column}"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/datagrid/scroll/{row}/{column}"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "selectDataGridCell", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/datagrid/select/{row}/{column}"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/datagrid/select/{row}/{column}"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "scrollToListBoxItem", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/listbox/scroll"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/listbox/scroll"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "findMenuItem", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/menu/item/{path}"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/menu/item/{path}"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "selectMenuItem", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/menu/select/{path}"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/menu/select/{path}"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "isComboBoxExpanded", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/combobox/expanded"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/combobox/expanded"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "expandComboBox", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/combobox/expand"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/combobox/expand"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "collapseComboBox", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/combobox/collapse"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/combobox/collapse"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "findComboBoxSelectedItem", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/combobox/items/selected"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/combobox/items/selected"));
 
             this.CommandExecutor.CommandInfoRepository.TryAddCommand(
                 "scrollToComboBoxItem", 
-                new CommandInfo("POST", "/session/{sessionId}/element/{id}/combobox/scroll"));
+                new CommandInfo(CommandInfo.PostCommand, "/session/{sessionId}/element/{id}/combobox/scroll"));
         }
 
         #endregion

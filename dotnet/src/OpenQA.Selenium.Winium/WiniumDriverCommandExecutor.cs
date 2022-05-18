@@ -29,7 +29,7 @@
 
         #endregion
 
-        #region Public Properties
+        #region Public Methods and Operators
 
         public CommandInfoRepository CommandInfoRepository
         {
@@ -39,9 +39,10 @@
             }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
+        public bool TryAddCommand(string commandName, CommandInfo info)
+        {
+            return this.internalExecutor.CommandInfoRepository.TryAddCommand(commandName, info);
+        }
 
         public Response Execute(Command commandToExecute)
         {
@@ -66,6 +67,10 @@
                     this.service.Dispose();
                 }
             }
+        }
+        public void Dispose()
+        {
+            this.internalExecutor.Dispose();
         }
 
         #endregion

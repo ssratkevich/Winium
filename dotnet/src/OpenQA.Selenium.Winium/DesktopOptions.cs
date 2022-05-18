@@ -5,7 +5,6 @@
     using System.Collections.Generic;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Remote;
 
     #endregion
 
@@ -154,7 +153,7 @@
                 capabilityDictionary.Add(LaunchDelayOption, this.launchDelay);
             }
 
-            return new DesiredCapabilities(capabilityDictionary);
+            return new WiniumDesiredCapabilities(capabilityDictionary);
         }
 
         #endregion

@@ -182,7 +182,7 @@
                 capabilityDictionary.Add(DependenciesOption, this.dependencies);
             }
 
-            return new DesiredCapabilities(capabilityDictionary);
+            return new WiniumDesiredCapabilities(capabilityDictionary);
         }
 
         #endregion

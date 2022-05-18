@@ -55,8 +55,6 @@
 
         private const string DesktopDriverServiceFileName = "Winium.Desktop.Driver.exe";
 
-        private const string SilverlightDriverServiceFileName = "WindowsPhoneDriver.OuterDriver.exe";
-
         private const string StoreAppsDriverServiceFileName = "Winium.StoreApps.Driver.exe";
 
         #endregion
@@ -65,9 +63,6 @@
 
         private static readonly Uri DesktopDriverDownloadUrl = new Uri(
             "https://github.com/2gis/Winium.Desktop/releases");
-
-        private static readonly Uri SilverlightDriverDownloadUrl =
-            new Uri("https://github.com/2gis/winphonedriver/releases");
 
         private static readonly Uri StoreAppsDriverDownloadUrl =
             new Uri("https://github.com/2gis/Winium.StoreApps/releases");
@@ -191,20 +186,6 @@
                 DesktopDriverServiceFileName,
                 FindFreePort(),
                 DesktopDriverDownloadUrl);
-        }
-
-        /// <summary>
-        /// Creates a default instance of the WiniumDriverService using a specified path to the WindowsPhone Driver.
-        /// </summary>
-        /// <param name="driverPath">The directory containing the WindowsPhone Driver executable.</param>
-        /// <returns>A <see cref="WiniumDriverService"/> using WindowsPhone Driver and random port.</returns>
-        public static WiniumDriverService CreateSilverlightService(string driverPath)
-        {
-            return new WiniumDriverService(
-                driverPath,
-                SilverlightDriverServiceFileName,
-                FindFreePort(),
-                SilverlightDriverDownloadUrl);
         }
 
         /// <summary>
