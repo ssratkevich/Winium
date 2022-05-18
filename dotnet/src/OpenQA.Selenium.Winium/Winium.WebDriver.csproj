@@ -28,6 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!--
+      Attention!
+      Selenium version 3.141.0 is last one supported by current implementation Winium.Desktop.Driver.
+      DO NOT CHANGE!
+      -->
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
   </ItemGroup>
 </Project>

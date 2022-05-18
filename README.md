@@ -1,13 +1,13 @@
-<p align="right">
-English description | <a href="README_RU.md">Описание на русском</a>
-</p>
-
 # Winium
 <p align="center">
 <img src="assets/winium.png" alt="Winium is Selenium Remote WebDriver implementations for automated testing on Windows platforms">
 </p>
 
 Automation framework for Windows platforms. It is free. It is opensource. It is Selenium-based.
+
+**Warning!**  
+Selenium version **3.141.0** is last one supported by current implementation `Winium.Desktop.Driver`.  
+**DO NOT CHANGE PACKAGE VERSION TILL `Winium.Desktop.Driver` WILL BE UP TO DATE!**
 
 # Why Winium?
 You have Selenium WebDriver for testing of web apps, Appium for testing of iOS and Android apps. And now you have Selenium-based tools for testing of Windows apps too. What are some of the benefits? As said by Appium:
