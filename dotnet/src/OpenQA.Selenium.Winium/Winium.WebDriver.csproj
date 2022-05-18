@@ -16,7 +16,16 @@
     <Product>OpenQA.Selenium.Winium</Product>
     <Authors>Syntellect, ssratkevich, 2gis</Authors>
     <Copyright>Copyright © 2022</Copyright>
+    <PackageIcon>SmallLogo.png</PackageIcon>
+    <RepositoryUrl>https://github.com/ssratkevich/Winium</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\SmallLogo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
