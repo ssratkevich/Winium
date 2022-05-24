@@ -1,14 +1,11 @@
-﻿namespace OpenQA.Selenium.Winium
+﻿using System;
+using OpenQA.Selenium.Remote;
+
+namespace OpenQA.Selenium.Winium
 {
-    #region using
-
-    using System;
-    using System.Reflection;
-
-    using OpenQA.Selenium.Remote;
-
-    #endregion
-
+    /// <summary>
+    /// Winium command executor.
+    /// </summary>
     public class WiniumDriverCommandExecutor : ICommandExecutor
     {
         #region Fields
@@ -21,6 +18,11 @@
 
         #region Constructors and Destructors
 
+        /// <summary>
+        /// Creates new instance of command executor.
+        /// </summary>
+        /// <param name="driverService">Winium service.</param>
+        /// <param name="commandTimeout">Timeout for command.</param>
         public WiniumDriverCommandExecutor(WiniumDriverService driverService, TimeSpan commandTimeout)
         {
             this.service = driverService;
@@ -31,19 +33,20 @@
 
         #region Public Methods and Operators
 
-        public CommandInfoRepository CommandInfoRepository
-        {
-            get
-            {
-                return this.internalExecutor.CommandInfoRepository;
-            }
-        }
+        /// <inheritdoc/>
+        public CommandInfoRepository CommandInfoRepository =>
+            this.internalExecutor.CommandInfoRepository;
 
-        public bool TryAddCommand(string commandName, CommandInfo info)
-        {
-            return this.internalExecutor.CommandInfoRepository.TryAddCommand(commandName, info);
-        }
+        /// <summary>
+        /// Try to add new command.
+        /// </summary>
+        /// <param name="commandName">Command.</param>
+        /// <param name="info">Command info.</param>
+        /// <returns>Operation result.</returns>
+        public bool TryAddCommand(string commandName, CommandInfo info) =>
+            this.internalExecutor.CommandInfoRepository.TryAddCommand(commandName, info);
 
+        /// <inheritdoc/>
         public Response Execute(Command commandToExecute)
         {
             if (commandToExecute == null)
@@ -68,6 +71,8 @@
                 }
             }
         }
+
+        /// <inheritdoc/>
         public void Dispose()
         {
             this.internalExecutor.Dispose();
