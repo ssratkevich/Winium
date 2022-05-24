@@ -18,6 +18,7 @@
     <Copyright>Copyright © 2022</Copyright>
     <PackageIcon>SmallLogo.png</PackageIcon>
     <RepositoryUrl>https://github.com/ssratkevich/Winium</RepositoryUrl>
+    <PackageTags>C# Automation Winium Selenium WebDriver</PackageTags>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
