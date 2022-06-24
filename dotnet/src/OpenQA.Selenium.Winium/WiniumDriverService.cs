@@ -77,6 +77,8 @@
 
         private string logPath = string.Empty;
 
+        private TimeSpan? elementSearchTimeThreshold;
+
         #endregion
 
         #region Constructors and Destructors
@@ -96,15 +98,8 @@
         /// </summary>
         public bool EnableVerboseLogging
         {
-            get
-            {
-                return this.enableVerboseLogging;
-            }
-
-            set
-            {
-                this.enableVerboseLogging = value;
-            }
+            get => this.enableVerboseLogging;
+            set => this.enableVerboseLogging = value;
         }
 
         /// <summary>
@@ -112,20 +107,26 @@
         /// </summary>
         public string LogPath
         {
-            get
-            {
-                return this.logPath;
-            }
+            get => this.logPath;
+            set => this.logPath = value;
+        }
 
-            set
-            {
-                this.logPath = value;
-            }
+        /// <summary>
+        /// Element search time threshold.
+        /// Available since Winium.Desktop.Driver 2.1.1.
+        /// </summary>
+        public TimeSpan? ElementSearchTimeThreshold
+        {
+            get => this.elementSearchTimeThreshold;
+            set => this.elementSearchTimeThreshold = value;
         }
 
         #endregion
 
         #region Properties
+
+        /// <inheritdoc/>
+        protected override bool HasShutdown => false;
 
         /// <summary>
         /// Gets the command-line arguments for the driver service.
@@ -144,6 +145,11 @@
                 if (this.enableVerboseLogging)
                 {
                     argsBuilder.Append(" --verbose");
+                }
+
+                if (this.elementSearchTimeThreshold.HasValue)
+                {
+                    argsBuilder.AppendFormat(" --searchDelay={0}", this.elementSearchTimeThreshold.Value.Milliseconds);
                 }
 
                 if (!string.IsNullOrEmpty(this.logPath))
